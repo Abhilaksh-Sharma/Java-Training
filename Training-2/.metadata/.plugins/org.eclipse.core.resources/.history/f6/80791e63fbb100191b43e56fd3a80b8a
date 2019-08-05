@@ -1,0 +1,21 @@
+package com.java.synchronize;
+
+class GenerateNumberTask implements Runnable{
+	private int MAX;
+	private boolean isEven;
+	
+	public GenerateNumberTask(int MAX , boolean isEven) {
+		this.MAX = MAX;
+		this.isEven = isEven;
+	}
+	
+	@Override
+	public void run() {
+
+		while(number<=MAX) {
+			
+		}
+		
+	}
+	
+}

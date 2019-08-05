@@ -1,0 +1,62 @@
+package com.java.executor;
+
+import java.util.Scanner;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+class CallableTask implements Callable<String>{
+
+	/* Callable interface --> Create a thread which can return some value (object)
+	 * Here we can throw exceptions as well unlike in Runnable interface
+	*/
+	@Override
+	public String call() throws Exception {
+		return "Callable interface Thread Running ...";
+	}
+	
+}
+
+
+class RunnableTask implements Runnable{
+
+	@Override
+	public void run() {
+		System.out.println("Runnable interface Thread Running ...");
+	}
+	
+}
+
+public class ExecutorProg {
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		//User-Input
+		Scanner in = new Scanner(System.in);
+		
+		System.out.print("Enter number of threads for FixedThreadPool : ");
+		int nThreads = in.nextInt();
+		int corePoolSize = Runtime.getRuntime().availableProcessors();
+		System.out.println("Numbre of cores available in your system : " + corePoolSize);
+		
+		//Creating ExecutorService :::Types of Thread Pools:::
+		ExecutorService executorService1 = Executors.newFixedThreadPool(nThreads);
+		ExecutorService executorService2 = Executors.newCachedThreadPool();
+		ExecutorService executorService3 = Executors.newScheduledThreadPool(corePoolSize);
+		ExecutorService executorService4 = Executors.newSingleThreadExecutor();
+		ExecutorService executorService5 = Executors.newWorkStealingPool();
+		
+		//ExecutorService Implemented via different ThreadPools
+		
+		executorService1.execute(new RunnableTask());
+		// submit() method in ExecutorService is overloaded for Runnable & Callable interface tasks
+		executorService1.submit(new RunnableTask());
+		// Upon invocation of a callable task you will always get in return a Future object
+		Future<Float> futureObject1 = executorService1.submit(new CallableTask());
+		System.out.println("Value of Future<> object : " + futureObject1.get());
+		
+		
+		
+	}
+
+}

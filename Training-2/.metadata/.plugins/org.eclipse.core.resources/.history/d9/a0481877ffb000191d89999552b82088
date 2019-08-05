@@ -1,0 +1,7 @@
+package com.java.thread;
+
+public class ThreadProg extends Thread{
+	public static void main(String[] args) {
+		ThreadProg thread = new ThreadProg();
+	}
+}

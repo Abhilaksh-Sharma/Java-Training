@@ -1,0 +1,141 @@
+import java.util.*;
+import java.util.stream.Stream;
+
+class solution {
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        
+        while(t>0){
+            
+            int m = in.nextInt();
+            
+            int n = in.nextInt();
+            
+            char input[][] = new char[m][n];
+            
+            int i=0,j=0;
+            int germsCount = 0 , germsKilled = 0;
+            
+            
+            for(i=0;i<m;i++){
+                input[i] = in.next().toCharArray();
+                long count = input[i].toString().chars().filter(ch->ch=='x').count();
+                
+                System.out.println("Count : " + count);
+                germsCount += count;
+            }
+            
+            
+            
+//            for(i=0;i<m;i++) {
+//            	for(j=0;j<n;j++) {
+//            		if(input[i][j]=='x'){
+//                        germsCount++;
+//                    }
+//            	}
+//            }
+            
+            
+            //Matrix(String[]) Traversal
+            for(i=0;i<m;i++){
+                for(j=0;j<n;j++){
+                    //Logic
+                    //Kill germs in horizontal & vertical direction
+                    if(input[i][j]=='b'){
+                        //Check for Up
+                        if(i>0 && input[i-1][j]=='x'){
+                        	input[i-1][j]='g';
+                            germsKilled++;
+                        }
+                        //Check for Down
+                        if((i+1)<m && input[i+1][j]=='x'){
+                        	input[i+1][j]='g';
+                            germsKilled++;
+                        }
+                        
+                        //Check for Left
+                        if(j>0 && input[i][j-1]=='x'){
+                        	input[i][j-1]='g';
+                            germsKilled++;
+                        }
+                        //Check for Right
+                        if((j+1)<n && input[i][j+1]=='x'){
+                        	input[i][j+1]='g';
+                            germsKilled++;
+                        }
+                        
+                        
+                    }//Kill germs in ALL(horizontal, vertical & diagonal) direction
+                    else if(input[i][j]=='r'){
+                        //Check for Up
+                        if(i>0 && input[i-1][j]=='x'){
+                        	input[i-1][j]='g';
+                            germsKilled++;
+                        }
+                        //Check for Down
+                        if((i+1)<m && input[i+1][j]=='x'){
+                        	input[i+1][j]='g';
+                            germsKilled++;
+                        }
+                        
+                        //Check for Left
+                        if(j>0 && input[i][j-1]=='x'){
+                        	input[i][j-1]='g';
+                            germsKilled++;
+                        }
+                        //Check for Right
+                        if((j+1)<n && input[i][j+1]=='x'){
+                        	input[i][j+1]='g';
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Up Left
+                        if(i>0 && j>0 && input[i-1][j-1]=='x'){
+                        	input[i-1][j-1]='g';
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Up Right
+                        if(i>0 && (j+1)<n && input[i-1][j+1]=='x'){
+                        	input[i-1][j+1]='g';
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Down Left
+                        if((i+1)<m && j>0 && input[i+1][j-1]=='x'){
+                        	input[i+1][j-1]='g';
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Down Right
+                        if((i+1)<m && (j+1)<n && input[i+1][j+1]=='x'){
+                        	input[i+1][j+1]='g';
+                            germsKilled++;
+                        }
+                        
+                    }
+                }
+            }
+            
+            System.out.println(germsCount-germsKilled);
+            
+//            System.out.println("Germs Count : " + germsCount);
+//            System.out.println("Germs Killed : " + germsKilled);
+//            
+//            System.out.println("\nFinal Array :-");
+//            
+//            for(i=0;i<m;i++) {
+//            	for(j=0;j<n;j++) {
+//            		System.out.print(input[i][j] + " ");
+//            	}
+//            	System.out.println();
+//            }
+            
+            t--;
+        }
+
+    }
+}

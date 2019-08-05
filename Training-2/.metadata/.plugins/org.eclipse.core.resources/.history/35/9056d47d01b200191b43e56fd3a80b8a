@@ -1,0 +1,48 @@
+package com.java.runnable;
+
+
+public class RunnableProg implements Runnable{
+
+	@Override
+	public void run() {
+		System.out.println("My Runnable Instance Thread ...");
+		
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		//Create an instance of thread using Runnable
+		Thread thread = new Thread(new RunnableProg());
+		
+		/*JOIN-EXAMPLE*/
+		Thread thread1 = new Thread(()->{
+			for(int i=0;i<100;i++) {
+				System.out.println(i);};
+		},"Thread-1");
+		
+		Thread thread2 = new Thread(()->{
+			for(int i=100;i<200;i++) {
+				System.out.println(i);};
+		},"Thread-2");
+		
+		Thread thread3 = new Thread(()->{
+			for(int i=200;i<300;i++) {
+				System.out.println(i);};
+		},"Thread-3");
+		
+		//Start & Join the Threads
+		thread1.start();
+		thread1.join();
+		
+		
+		thread2.start();
+		thread2.join();
+		
+		
+		thread3.start();
+		
+
+		
+		
+	}
+
+}

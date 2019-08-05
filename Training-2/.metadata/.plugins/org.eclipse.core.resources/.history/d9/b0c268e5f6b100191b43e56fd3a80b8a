@@ -1,0 +1,86 @@
+package com.java.synchronize;
+
+class Number{
+	
+	private int number;
+	private boolean isEven;
+	
+	public Number() {
+		number = 0;
+		isEven = true;
+	}
+	
+	public int getNumber() {
+		return number;
+	}
+	
+	public  void generateOdd(int number) {
+		synchronized(this) {
+			//While number is EVEN
+			while(isEven) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			isEven = false;
+			System.out.println(number);
+			this.number = number++;
+			notifyAll();
+		}
+	}
+	
+	public void generateEven(int number) {
+		synchronized (this) {
+			//While number is ODD
+			while(!isEven) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			isEven=true;
+			System.out.println(number);
+			this.number = number++;
+			notifyAll();
+		}
+	}
+
+}
+
+public class ThreadSynchronization{
+	public static void main(String[] args) {
+		
+		Number number = new Number();
+		
+		Thread threadEven = new Thread(new Runnable() {
+			public void run() {
+				System.out.println("Even Thread Invoked ...");
+				for(int i=0;i<5;i++)
+					number.generateEven(i);
+				
+				Thread.sleep(1000);)
+			}
+		});
+		
+		Thread threadOdd = new Thread(new Runnable() {
+			public void run() {
+				System.out.println("Odd Thread Invoked ...");
+				for(int i=0;i<5;i++)
+					number.generateOdd(i);
+			}
+		});
+		
+		//Starting Threads
+		threadEven.start();
+		threadOdd.start();
+		
+		
+	}
+}

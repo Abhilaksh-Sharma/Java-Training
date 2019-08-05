@@ -1,0 +1,41 @@
+package com.java.thread;
+
+public class ThreadProg extends Thread{
+	
+	public void run() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Thread is runnning...");
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		ThreadProg thread = new ThreadProg();
+		
+		System.out.println("Thread State : " + thread.getState());
+		
+		//Invokes run() method
+		thread.start();
+		
+		System.out.println("Thread State : " + thread.getState());
+		
+		System.out.println("Thread Id : " + thread.getId());
+		
+		System.out.println("Thread Name : " + thread.getName());
+		
+		System.out.println("Thread Priority : " + thread.getPriority());
+		
+		System.out.println("Thread State : " + thread.getState());
+		
+		System.out.println("Thread Group : " + thread.getThreadGroup());
+		
+		
+		
+		
+	}
+}

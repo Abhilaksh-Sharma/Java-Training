@@ -1,0 +1,113 @@
+import java.util.*;
+
+class solution {
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        
+        while(t>0){
+            
+            int m = in.nextInt();
+            
+            int n = in.nextInt();
+            
+            char a[][] = new char[m][n];
+            
+            int i=0,j=0;
+            for(i=0;i<m;i++){
+                a[i] = in.next().toCharArray();
+            }
+            
+            int germsCount = 0 , germsKilled = 0;
+            //Matrix(String[]) Traversal
+            for(i=0;i<m;i++){
+                for(j=0;j<n;j++){
+                    //Logic
+                    if(input[i].charAt(j)=='x'){
+                        germsCount++;
+                    }//Kill germs in horizontal & vertical direction
+                    else if(input[i].charAt(j)=='b'){
+                        //Check for Up
+                        if(i>0 && input[i-1].charAt(j)=='x'){
+                            input[i-1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        //Check for Down
+                        if((i+1)<m && input[i+1].charAt(j)=='x'){
+                        	input[i+1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                        //Check for Left
+                        if(j>0 && input[i].charAt(j-1)=='x'){
+                        	input[i].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        //Check for Right
+                        if((j+1)<n && input[i].charAt(j+1)=='x'){
+                        	input[i].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                        
+                    }//Kill germs in ALL(horizontal, vertical & diagonal) direction
+                    else{
+                        //Check for Up
+                        if(i>0 && input[i-1].charAt(j)=='x'){
+                        	input[i-1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        //Check for Down
+                        if((i+1)<m && input[i+1].charAt(j)=='x'){
+                        	input[i+1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                        //Check for Left
+                        if(j>0 && input[i].charAt(j-1)=='x'){
+                        	input[i].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        //Check for Right
+                        if((j+1)<n && input[i].charAt(j+1)=='x'){
+                        	input[i].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Up Left
+                        if(i>0 && j>0 && input[i-1].charAt(j-1)=='x'){
+                        	input[i-1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Up Right
+                        if(i>0 && (j+1)<n && input[i-1].charAt(j+1)=='x'){
+                        	input[i-1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Down Left
+                        if((i+1)<m && j>0 && input[i+1].charAt(j-1)=='x'){
+                        	input[i+1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                        //Check for Diagonal Down Right
+                        if((i+1)<m && (j+1)<n && input[i+1].charAt(j+1)=='x'){
+                        	input[i+1].replaceFirst("x","g");
+                            germsKilled++;
+                        }
+                        
+                    }
+                }
+            }
+            
+            System.out.println(germsCount-germsKilled);
+            
+            t--;
+        }
+
+    }
+}

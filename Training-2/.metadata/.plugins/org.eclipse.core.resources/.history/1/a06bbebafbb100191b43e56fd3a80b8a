@@ -1,0 +1,59 @@
+package com.java.synchronize;
+
+class GenerateNumberTask implements Runnable{
+	private int MAX;
+	private boolean isEven;
+	
+	public GenerateNumberTask(int MAX , boolean isEven) {
+		this.MAX = MAX;
+		this.isEven = isEven;
+	}
+	
+	@Override
+	public void run() {
+
+		int number = isEven?2:1;
+		while(number<=MAX) {
+			if(isEven) {
+				//Print Even
+			}
+			else {
+				//Print Odd
+			}
+			number = number + 2;
+		}
+		
+	}
+	
+}
+
+class PrintNumber{
+	//Default value --> FALSE
+	volatile boolean isOdd;
+	
+	synchronized public void printOdd(int number) {
+		while(isOdd) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		isOdd = true;
+		System.out.println(number);
+		notify();
+	}
+	
+	synchronized public void printEven(int number) {
+		while(isOdd) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		isOdd = false;
+		System.out.println(number);
+		notify();
+	}
+}

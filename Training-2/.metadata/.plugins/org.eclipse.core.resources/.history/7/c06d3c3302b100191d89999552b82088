@@ -1,0 +1,14 @@
+package com.java.thread;
+
+public class ThreadProg extends Thread{
+	
+	public void run() {
+		System.out.println("Thread is runnning...");
+	}
+	
+	
+	public static void main(String[] args) {
+		ThreadProg thread = new ThreadProg();
+		thread.start();
+	}
+}

@@ -1,0 +1,17 @@
+package com.java.runnable;
+
+
+public class RunnableProg implements Runnable{
+
+	@Override
+	public void run() {
+		System.out.println("My Runnable Instance Thread ...");
+		
+	}
+	
+	public static void main(String[] args) {
+		//Create an instance of thread using Runnable
+		Thread thread = new Thread(new RunnableProg());
+	}
+
+}
